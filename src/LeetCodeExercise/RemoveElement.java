@@ -13,7 +13,7 @@ public class RemoveElement {
 			
 		}
 		
-		return nums.length;
+		return index;
         
     }
 	
