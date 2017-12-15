@@ -13,6 +13,11 @@ public class CarStop {
 		audi.run();
 		bmw.makeString();//¤¶­±¤èªk
 		bmw.run();
+		System.out.println("---------------------------");
+		Audi audi2=(Audi)carFactory.creatAudi();
+		Bmw bmw2=(Bmw)carFactory.creatBmw();
+		audi2.run();
+		bmw2.run();
 	}
 
 }
