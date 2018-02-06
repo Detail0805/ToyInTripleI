@@ -1,9 +1,14 @@
-package String;
+package Lamda;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.OptionalDouble;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import String.ChangeInteger;
 
 
 public class Test {
@@ -52,14 +57,53 @@ public class Test {
 		System.out.println("op.isPresent()" + op.isPresent());
 		System.out.println("op.isPresent()" + op.orElse(0.0));
 		System.out.println("===============");
-		op.ifPresent(s -> System.out.print("我有東西s"));
+		op.ifPresent(s -> {
+			System.out.print("我有東西 s :" + s);
+			System.out.println();
+		});
+
+		ArrayList hihis = hihi.stream().filter(s -> s > 0).mapToDouble(s -> s + 1.0).collect(() -> new ArrayList<>(),
+				(newList, resource) -> newList.add(resource), (totalList, newList) -> totalList.addAll(newList));
+
+		System.out.println("hihis :" + hihis);
 	}
 
 	public static void main(String[] args) {
 
 		Test t = new Test();
-		t.listAdd();
+		// t.listAdd();
+
+		List<Person> people = Arrays.asList(new Person("David", "Taiwan", 26), new Person("David2", "naito", 27),
+				new Person("Paul", "bato", 28), new Person("Mary", "taipei", 29), new Person("Sunny", "taoyaun", 20),
+				new Person("Peter", "Taiwan6", 21));
+		System.out.println("people :" + people);
+		// lamda實作方法局限於MAS
+		Collections.sort(people, (p1, p2) -> p1.getAddress().compareTo(p2.getAddress()));
+		System.out.println("people :" + people);
+
+		// 使用介面Predicate介面方法test去測試差異
+		System.out.println("false :");
+		printdiff(people, p1 -> false);
+		System.out.println("=================");
+		System.out.println("true :");
+		printdiff(people, p1 -> true);
+		// 測試傳入不同condition
+		System.out.println("傳入不同條件測試 P: ");
+		printdiff(people, p1 -> p1.getName().startsWith("P"));
+		System.out.println("傳入不同條件測試 D: ");
+		printdiff(people, p1 -> p1.getName().startsWith("D"));
 
 	}
 
+	public static void printdiff(List<Person> list, Predicate<Person> predicate) {
+		list.forEach(result -> {
+			if (predicate.test(result))
+
+				System.out.println(" p:" + result);
+		});
+	}
+
+	interface oneFunction {
+		void onefunction();
+	}
 }
