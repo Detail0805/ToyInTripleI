@@ -23,12 +23,27 @@ public class ExceptionHandlingExample {
 				System.out.println("Exception happened");
 			}
 		});
+
+		process(someNumbers, key1, wrapperLambda((v, k) -> System.out.println(v / k)));
 	}
 
 	private static void process(int[] someNumbers, int key, BiConsumer<Integer, Integer> consumer) {
 		for (int i : someNumbers) {
 			consumer.accept(i, key);
 		}
+	}
+
+	// 再用一層LAMBDA包起來PASS到另一個LAMBDA
+	private static BiConsumer<Integer, Integer> wrapperLambda(BiConsumer<Integer, Integer> consumer) {
+		// return (v, k) -> System.out.println(v + k);
+		return (v, k) -> {
+			try {
+				consumer.accept(v, k);
+			} catch (ArithmeticException e) {
+				System.out.println("Exception caught in wrapper lambda");
+
+			}
+		};
 	}
 
 }
