@@ -104,7 +104,7 @@ public class Test {
 		System.out.println("傳入不同條件測試 P: ");
 		performCondition(people, p1 -> p1.getName().startsWith("P"), p -> System.out.println(p));
 		System.out.println("傳入不同條件測試 D: ");
-		performCondition(people, p1 -> p1.getName().startsWith("D"), p -> System.out.println(p));
+		performCondition(people, p1 -> p1.getName().startsWith("D"), p -> System.out.println(p.name));
 	}
 
 	public static void printCondition(List<Person> list, Predicate<Person> predicate) {
