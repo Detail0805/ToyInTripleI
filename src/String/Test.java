@@ -53,6 +53,7 @@ public class Test {
 		System.out.println("op.isPresent()" + op.orElse(0.0));
 		System.out.println("===============");
 		op.ifPresent(s -> System.out.print("我有東西s"));
+		
 	}
 
 	public static void main(String[] args) {
